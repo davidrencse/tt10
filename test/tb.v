@@ -8,10 +8,9 @@ module tb ();
 
   // Dump the signals to a VCD file. You can view it with gtkwave or surfer.
   initial begin
-    $dumpfile("tb.vcd");
-    $dumpvars(0, tb);
-    #1;
-  end
+     $dumpfile("tb.vcd");
+     $dumpvars(0, tb); // Dump all signals in the testbench
+   end
 
   // Wire up the inputs and outputs:
   reg clk;
