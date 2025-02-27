@@ -16,10 +16,15 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
+  // Intermediate XOR result
+  wire [7:0] xor_result = ui_in ^ uio_in;
+
+  // Output logic: Conditional shift based on A[7]
+  assign uo_out = ui_in[7] ? {xor_result[6:0], 1'b0} : xor_result;
+
+  // Configure bidirectional port as input
+  assign uio_out = 8'b0;  // Set output to 0 (unused)
+  assign uio_oe  = 8'b0;  // Set enable to 0 (configure as input)
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, rst_n, 1'b0};
