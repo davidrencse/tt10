@@ -16,26 +16,18 @@ module tt10 (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // Intermediate XOR result
-  wire [7:0] xor_result = ui_in ^ uio_in;
+   wire [7:0] xor_result = ui_in ^ uio_in;
 
-  // Output logic: Conditional shift based on A[7]
+  // Conditional shift logic
   reg [7:0] c_out;
   always @(*) begin
     if (!rst_n) begin
-      c_out = 8'b0;  // Reset condition (active low)
+      c_out = 8'b0;  // Reset to 0
     end else begin
       c_out = ui_in[7] ? {xor_result[6:0], 1'b0} : xor_result;
     end
   end
 
-  assign uo_out = c_out;  // Assign output
-
-  // Configure bidirectional port as input
-  assign uio_out = 8'b0;  // Set output to 0 (unused)
-  assign uio_oe  = 8'b0;  // Set enable to 0 (configure as input)
-
-  // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, 1'b0};
+  assign uo_out = c_out;
 
 endmodule
