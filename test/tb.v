@@ -29,12 +29,18 @@ module tb ();
 
   // Replace tt_um_example with your module name:
   tt10 user_project (
-   .ui_in(ui_in),
+    .ui_in(ui_in),
     .uio_in(uio_in),
     .uo_out(uo_out),
     .clk(clk),
     .rst_n(rst_n)
   );
+
+  // Generate a 10us clock (100 KHz)
+  initial begin
+    clk = 0;
+    forever #5 clk = ~clk; // 10us period (100 KHz)
+  end
 
   // Generate a 10us clock (100 KHz)
   initial begin
