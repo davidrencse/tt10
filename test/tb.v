@@ -1,17 +1,18 @@
 `default_nettype none
-`timescale 1ns / 1ps
+`timescale 1ns/1ps
 
-/* This testbench just instantiates the module and makes some convenient wires
-   that can be driven / tested by the cocotb test.py.
-*/
-module tb ();
-   // Inputs
+module tb;
+  // Inputs
   reg [7:0] ui_in;   // A
   reg [7:0] uio_in;  // B
   reg clk;
   reg rst_n;
-  // Replace tt_um_example with your module name:
-  tt10 user_project (
+
+  // Outputs
+  wire [7:0] uo_out; // C
+
+  // Instantiate the module
+  tt10_lab_2_repo uut (
     .ui_in(ui_in),
     .uio_in(uio_in),
     .uo_out(uo_out),
