@@ -5,7 +5,6 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
-
 @cocotb.test()
 async def test_project(dut):
     dut._log.info("Start")
@@ -25,7 +24,6 @@ async def test_project(dut):
 
     dut._log.info("Test project behavior")
 
-    # Set the input values you want to test
     # Test case 1: A[7] = 0, no shift
     dut.ui_in.value = 0b01010101  # A = 85
     dut.uio_in.value = 0b00110011  # B = 51
